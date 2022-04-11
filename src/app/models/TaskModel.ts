@@ -1,4 +1,4 @@
 export interface Task{
-    name:string;
-    urgency:string;
+    name:string,
+    urgency:string
 }
