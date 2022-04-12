@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/app/models/TaskModel';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-tasks',
@@ -9,11 +10,9 @@ import { Task } from 'src/app/models/TaskModel';
 export class TasksComponent implements OnInit {
   public tasks:Task[]=[];
 
-  constructor() {
-    let data=localStorage.getItem("tasks");
-    if (data!=null){
-      this.tasks=JSON.parse(data);
-    }
+  constructor(private taskService:TaskService) {
+    taskService.load();
+    this.tasks = taskService.tasks;
   }
 
   ngOnInit(): void {
@@ -25,19 +24,10 @@ export class TasksComponent implements OnInit {
 
   public addNewTask(name:HTMLInputElement, urgency:HTMLSelectElement){
     if (name.value!=''){
-      this.tasks.push({
-        name  : name.value,
-        urgency : urgency.value
-      });
+      this.taskService.add(name.value, urgency.value)
       name.value='';
       urgency.value='';
-      this.save();
     }
-  }
-
-  public removeTask(i:number){
-    this.tasks.splice(i, 1);
-    this.save();
   }
 
 }
