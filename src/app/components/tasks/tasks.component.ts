@@ -18,16 +18,4 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  private save(){
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
-  }
-
-  public addNewTask(name:HTMLInputElement, urgency:HTMLSelectElement){
-    if (name.value!=''){
-      this.taskService.add(name.value, urgency.value)
-      name.value='';
-      urgency.value='';
-    }
-  }
-
 }

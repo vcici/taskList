@@ -9,26 +9,4 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">Pridėti naują užduotį</div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="" class="form-label">Pavadinimas: </label>
-                    <input type="text" class="form-control" #newName >
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Tipas: </label>
-                    <select class="form-control" #newSelect>
-                        <option value="skubu">Skubu</option>
-                        <option value="neskubu">Neskubu</option>
-                        <option value="rutininis">Rutininis</option>
-                        <option value="ypacskubu">Ypač skubu</option>
-                        </select>
-                </div>
-                <button class="btn btn-success" (click)="addNewTask(newName, newSelect)">Pridėti</button>
-            </div>
-        </div>
-    </div>
 </div>
