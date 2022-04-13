@@ -7,10 +7,13 @@ import { TaskItemComponent } from './components/tasks/task-item/task-item.compon
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TaskNewComponent } from './components/tasks/task-new/task-new.component';
 import { RouterModule, Routes } from '@angular/router';
+import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
+import { FormsModule } from '@angular/forms';
 
 const tasksRoutes:Routes=[
   { path:'', component:TasksComponent},
-  { path:'new', component:TaskNewComponent}
+  { path:'new', component:TaskNewComponent},
+  { path: 'edit/:index', component:TaskEditComponent}
 ];
 
 @NgModule({
@@ -19,10 +22,12 @@ const tasksRoutes:Routes=[
     TasksComponent,
     TaskItemComponent,
     NavigationComponent,
-    TaskNewComponent
+    TaskNewComponent,
+    TaskEditComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(tasksRoutes)
   ],
   providers: [],

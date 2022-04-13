@@ -31,4 +31,14 @@ export class TaskService {
     this.tasks.splice(index,1);
     this.save();
   }
+
+  public get(index:number){
+    return this.tasks[index];
+  }
+
+  public update(index:number, name:string, urgency:string){
+    this.tasks[index].name = name;
+    this.tasks[index].urgency = urgency;
+    this.save();
+  }
 }
