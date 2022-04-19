@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Task } from 'src/app/models/TaskModel';
 
 @Injectable({
@@ -6,6 +6,7 @@ import { Task } from 'src/app/models/TaskModel';
 })
 export class TaskService {
   public tasks:Task[]=[];
+  public onTasksChange = new EventEmitter();
 
   constructor() { }
 
@@ -25,11 +26,13 @@ export class TaskService {
       urgency : urgency
     });
     this.save();
+    this.onTasksChange.emit();
   }
 
   public delete(index:number){
     this.tasks.splice(index,1);
     this.save();
+    this.onTasksChange.emit();
   }
 
   public get(index:number){
@@ -40,5 +43,29 @@ export class TaskService {
     this.tasks[index].name = name;
     this.tasks[index].urgency = urgency;
     this.save();
+    this.onTasksChange.emit();
+  }
+
+  public getTaskCount(){
+    return this.tasks.length;
+  }
+
+  public getTaskAccordingUrgency():number[]{
+    let taskUrgencyArray:number[] = [0, 0, 0, 0];
+    for (let task of this.tasks){
+      if (task.urgency == 'skubu'){
+        taskUrgencyArray[0] +=1;
+      }
+      if (task.urgency == 'neskubu'){
+        taskUrgencyArray[1] +=1;
+      }
+      if (task.urgency == 'ypacskubu'){
+        taskUrgencyArray[2] +=1;
+      }
+      if (task.urgency == 'rutininis'){
+        taskUrgencyArray[3] +=1;
+      }
+    }
+    return taskUrgencyArray;
   }
 }
